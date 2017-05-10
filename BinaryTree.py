@@ -24,7 +24,7 @@ class Node(object):
         node, parent = self.find_node(data)
         if node is not None:
             children_pop = node.children_pop()
-        if children_pop == 0
+        if children_pop == 0:
             if parent:
                 if parent.left is node:
                     parent.left = None
@@ -49,7 +49,16 @@ class Node(object):
                 self.right = replacement.right
                 self.data = replacement.data
         else:
-
+            parent = node
+            successor = node.right
+            while successor.left:
+                parent = successor
+                successor = successor.left
+                node.data = successor.data
+                if parent.left == successor:
+                    parent.left = successor.right
+                else:
+                    parent.right = successor.right
 
     def children_pop(self):
         pop=0
